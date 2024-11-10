@@ -1,0 +1,223 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import { supabase } from '../supabaseClient.js';
+
+const metadata = {
+  title: 'SVAG — Better Insights. Better Integration. Better Risk Management.',
+  ignoreTitleTemplate: true,
+};
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  const formData = new FormData(event.target);
+  const data = {
+    name: formData.get('name'),
+    company: formData.get('company'),
+    email: formData.get('email'),
+    message: formData.get('message'),
+  };
+
+  const { error } = await supabase
+    .from('contact_messages')
+    .insert([data]);
+
+  if (error) {
+    console.error('Error inserting data:', error);
+    alert('There was an error submitting your data. Please try again.');
+  } else {
+    alert('Your message has been submitted successfully!');
+    event.target.reset(); // Reset the form
+  }
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero2
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get started',
+        href: '#',
+        target: '_blank',
+        // icon: 'tabler:download',
+      },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{
+      src: '~/assets/images/global-network.jpg',
+      alt: 'SVAG Hero Image',
+    }}
+  >
+    <Fragment slot="title">
+      <span class="text-primary dark:text-white highlight"> Better</span> Insights.<br /> 
+      <span class="text-primary dark:text-white highlight"> Better</span> Integration. <br />
+      <span class="text-primary dark:text-white highlight"> Better</span> Risk Management. <br />
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        <span class="font-semibold">SVAG</span> is a revolutionary service that gives you a unified view of your
+        data landscape. Our algorithmically driven approach creates a detailed blueprint of your data, harmonizing internal
+        and external definitions throughout your processes.
+      </span>
+    </Fragment>
+  </Hero2>
+
+  <!-- Content Widget **************** -->
+  <Content
+    isReversed
+    tagline="The Challenge"
+    title="Data Visibility"
+    items={[
+      {
+        title: 'Visibility',
+        description:
+          'Without comprehensive insights into your data ecosystem, inefficiencies creep in, leading to financial losses and unpredictable outcomes. Dont let data become a liability.',
+      },
+      {
+        title: 'Fragmentation',
+        description:
+          'Data silos and inconsistent definitions across teams prevent a unified view of your data landscape, hindering effective decision-making.',
+      },
+      {
+        title: 'Agility',
+        description:
+          'Rapidly evolving business and regulatory requirements demand a flexible, scalable approach to data governance. Rigid processes hold you back from staying ahead of the curve.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/data-dilemma.jpg',
+      alt: 'Colorful Image',
+    }}>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">The Data-Driven Dilemma</h3>
+      In today's data-driven world, organizations face critical challenges around:
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Lightweight & Fast',
+        description: `Our rapid onboarding SaaS service gets you up and running without the hassle.`,
+      },
+      {
+        title: 'Unified Insights',
+        description:
+          'Gain a clear perspective that empowers your data teams, business analysts, product teams, and operational teams to make informed decisions.',
+      },
+      {
+        title: 'Scalable Solutions',
+        description:
+          "Easily adapt your data governance framework to meet the evolving needs of your organization, ensuring long-term sustainability.",
+      },
+      {
+        title: 'Enhanced Collaboration',
+        description:
+          'Foster seamless communication among teams with a centralized platform that breaks down silos and enhances collective decision-making.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
+      alt: 'Blueprint Image',
+    }}>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Our Solution</h3>
+      Introducing Single View Agile Governance — a revolutionary service designed to give you a unified view of your data landscape. Our algorithmically driven approach creates a detailed blueprint of your data, harmonizing internal and external definitions throughout your processes. Why Choose Svag?
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Features Widget *************** -->
+  <Features
+    id="features"
+    tagline="Features"
+    title="What you get with SVAG"
+    subtitle="Transform your data management with comprehensive insights, seamless integration, and effective risk management."
+    items={[
+      {
+        title: 'Automatic API Contract Generation',
+        description:
+          'Simplify your integration processes with auto-generated contracts.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Rapid Synthetic Data Generation',
+        description:
+          'Flexibly create tailored data to suit your needs.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Conversational Querying',
+        description:
+          'Access data elements in a business-friendly language.',
+        icon: 'tabler:message-circle',
+      },
+      {
+        title: 'Categorization & Reporting',
+        description:
+          'Make decision-making easier with categorized elements and effortless report generation.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Collaboration Tools',
+        description:
+          "Work together seamlessly with built-in collaboration features.",
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Standardized Terminology',
+        description:
+          'Navigate your data policies with focused references to a glossary of standard terms.',
+        icon: 'tabler:book',
+      },
+    ]}
+  />
+
+  <!-- Contact Widget *************** -->
+  <ContactUs
+    id="form"
+    title="Unlock Transformative Data Insights"
+    subtitle="Discover the Power of Single View Agile Governance - Seamlessly Integrate, Analyze, and Harness Your Data for Unparalleled Success!"
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Company',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+    description="Our support team typically responds within 24 business hours."
+  />
+</Layout>
