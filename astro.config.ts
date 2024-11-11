@@ -23,7 +23,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   site: 'https://svag.github.io',
-  output: 'static',
+  base: 'svaglabs',
 
   integrations: [
     tailwind({
