@@ -1,7 +1,7 @@
 site:
   name: SVAG
-  site: 'https://astrowind.vercel.app'
-  base: '/'
+  site: 'https://svaglabs2024.github.io/'
+  base: '/svaglabs'
   trailingSlash: false
 
   googleSiteVerificationId: false
@@ -40,19 +40,19 @@ apps:
       isEnabled: false
       permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
-        index: true
+        index: false
 
     list:
       isEnabled: false
       pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
       robots:
-        index: true
+        index: false
 
     category:
       isEnabled: false
       pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
       robots:
-        index: true
+        index: false
 
     tag:
       isEnabled: false
